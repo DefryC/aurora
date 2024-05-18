@@ -113,3 +113,44 @@ https://github.com/xqdoo00o/ChatGPT-to-API
 ## License
 
 MIT License
+
+========================================================================================================================================================================
+
+首先感谢@xiaofei xiao等贡献者的项目GitHub - aurora-develop/aurora: free 60
+
+如果你的鸡儿跑这个项目会报错 一般都是ip问题 项目是支持Proxy的。这里要请出IP界大善人https://my.socks5.io/ （含AFF） 16 提供免费动态住宅和机房IP。
+
+【全球代理IP免费用】！免费用！免费用！
+全球200+国家，9000w+动态IP，没任何费用！
+动态住宅IP/静态住宅IP/机房IP等，永久免费！
+
+官网：https://my.socks5.io#JFZVLCYUBR 16 【AFF链接补贴家用】
+点击注册，永久免费海外IP.
+
+目前aurora已闭源，将 aurora-linux-amd64.tar.gz 9 解压
+
+cp env.template .env
+
+编辑.env 补充代理信息PROXY_URL=http://user:pass@proxy.socks5.io:3004
+
+运行./aurora 看看日志
+
+如果聊天仍然报错，curl http://refresh.socks5.io/refresh?user=yourusername&country=&state=&city= 切换下IP。这个链接在https://my.socks5.io/ （含AFF） 16 生成代理信息后能看到
+
+没问题的话，crontab加个任务每五分钟刷新IP */5 * * * * curl http://refresh.socks5.io/refresh?user=yourusername&country=&state=&city=
+
+后台运行aurora nohup ./aurora >/dev/null 2>&1 &
+
+也试了docker, docker-compose.yml加环境变量好像没生效(聊天仍然报错)不知道怎么回事，佬们帮忙看看
+
+version: '3'
+services:
+  app:
+    image: ghcr.io/aurora-develop/aurora:latest
+    container_name: aurora
+    restart: unless-stopped
+    ports:
+      - '8080:8080'
+    environment: 
+      - PROXY_URL=http://user:pass@proxy.socks5.io:3004
+早上起来发现code: 407 Proxy Authorization Required。免费流量用完了，改成AFF链接补贴家用…
